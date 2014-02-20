@@ -29,23 +29,23 @@ Postitustel on LaTeXi ja syntax highlighting tugi matemaatiliste avaldiste ja ko
 Võimalik funktsionaalsus - lihtsustatud Stackoverflow rep süsteem - igal postitusel on "Aitäh" nupuke vms - kui postitus oli kasulik, saavad kasutajad sellega postitajat tänada, nii on igal kasutajal oma "skoor" (ala reddit karma)
 
 
-Hindamiseks esitatavad punktid:  
-####5.4 Rakenduse koodirepositooriumi üles seadmine
+##Hindamiseks esitatavad punktid:  
+#####5.4 Rakenduse koodirepositooriumi üles seadmine
 Rakendus on jaotatud frontendi ja backendi jaoks kaheks eraldi projektiks. Kuna tegu on väiksema rakendusega, hoian nad paremaks haldamiseks ühes repos eraldi kaustades - front ja back.
 
 
 #####5.3 Rakenduse ülesseadmine testkeskkonda
-Testkeskkonnaks valisin AWSi lahenduse. Hetkel jooksevad seal 
+Testkeskkonnaks on AWSi lahendus. Hetkel jooksevad seal 
 * tomcat (http://ec2-54-213-178-112.us-west-2.compute.amazonaws.com:8080/)
 * ja mysql (andmebaasiühenduse näide: http://ec2-54-213-178-112.us-west-2.compute.amazonaws.com:8080/back-1.0/rest/users)
 
 
-####5.5 Prototüüp
+#####5.5 Prototüüp
 Prototüüpi saab näha testkeskkonas http://ec2-54-213-178-112.us-west-2.compute.amazonaws.com:8080/front/app/#/subject/1
 (war-i pakendamisega tekkisid encodingu probleemid, seega testkeskonnas võivad täpitähed hetkel katki olla.)  
-Kohalikus masinas tuleb frontendi nägemiseks front/app kaustas olles käivitada käsk node ../web-server.js
+Kohalikus masinas tuleb frontendi nägemiseks front/app kaustas olles käivitada käsk `node ../web-server.js`
 Default aadress on sel juhul localhost:8000. Seda saab konfida web-server.js DEFAULT_PORT muutujaga.  
-Kasutatud on Angulari ja Bootstrap 3 raamistikke, frontendi struktuur angular-seed põhjal.
+Kasutatud on [AngularJS](http://angularjs.org/) ja [Bootstrap 3](http://getbootstrap.com/) raamistikke, frontendi struktuur [angular-seed](https://github.com/angular/angular-seed) põhjal.
 Hetkel prototüübi koodi vaadata ei tasu, midagi ilusat sealt ei leia.
 
 
