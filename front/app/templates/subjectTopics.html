@@ -1,0 +1,51 @@
+<div class="content-header">
+  <h1>
+    <a id="menu-toggle" href="#" class="btn btn-default"><i class="icon-reorder"></i></a>
+    {{activeSubject.name}}
+  </h1>
+</div>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#/newTopic/{{activeSubject.id}}">Uus teema</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">Sorteeri <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Viimane vastus</a></li>
+          <li><a href="#">Teema kuupäev</a></li>
+          <li><a href="#">Aktiivsus</a></li>
+        </ul>
+      </li>
+    </ul>
+
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+<div class="page-content inset">
+  <section class="row">
+    <article ng-repeat="topic in activeTopics | orderBy:sortOrder">
+      <header>
+        <a href="#/topic/{{topic.topicId}}">
+        <h3 class="topicTitle">
+          {{topic.title}}
+        </h3>
+          </a>
+        <span class="pubDate">
+          postitas {{topic.author}}
+          <time datetime="2014-02-14T23:47+02:00">{{topic.datePublished}}</time>
+        </span>
+      </header>
+      <p class="articleText">
+        {{topic.text}}
+      </p>
+      <footer>
+        <a href="#/topic/{{topic.topicId}}" class="commentLink">
+        {{topic.replies.length}} vastust
+          </a>
+      </footer>
+      <hr>
+    </article>
+  </section>
+</div>

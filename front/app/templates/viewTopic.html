@@ -1,0 +1,66 @@
+<div class="page-content inset">
+  <section class="row">
+    <article>
+      <header>
+          <h3 class="topicTitle">
+            {{activeTopic.title}}
+          </h3>
+        <span class="pubDate">
+          postitas {{topic.author}}
+          <time datetime="2014-02-14T23:47+02:00">{{activeTopic.datePublished}}</time>
+        </span>
+      </header>
+      <p class="articleText">
+        {{activeTopic.text}}
+      </p>
+    </article>
+
+
+    <h4 style="margin-top:40px;">
+      Kommentaarid
+    </h4>
+    <article ng-repeat="reply in activeTopic.replies" class="panel panel-default">
+
+      <div class="panel-body">
+          {{reply.text}}
+        </div>
+
+      <div class="panel-footer">
+        {{reply.author}}
+        <span class="pubDate">
+          <time datetime="2014-02-14T23:47+02:00">{{activeTopic.datePublished}}</time>
+        </span>
+      </div>
+
+
+    </article>
+
+
+  <pre>
+    {{typingText}}
+</pre>
+
+
+
+    <form>
+      <fieldset>
+        <legend>Vasta</legend>
+        <div class="form-group">
+          <label for="topicText">Sisu</label>
+          <textarea id="topicText" name="topicText" class="form-control" rows="10" ng-model="typingText"></textarea>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox">Anonüümus</label>
+
+        </div>
+        <button class="btn btn-primary">Vasta
+
+
+
+        </button>
+      </fieldset>
+    </form>
+
+
+  </section>
+</div>

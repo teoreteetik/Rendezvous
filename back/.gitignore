@@ -1,0 +1,7 @@
+*.class
+.classpath
+*.jar
+.gradle/**
+bin/**
+db.properties
+*.war
