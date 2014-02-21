@@ -8,7 +8,7 @@
   <div class="container-fluid">
 
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#/newTopic/{{activeSubject.id}}">Uus teema</a></li>
+      <li class="active"><a href="#/subject={{activeSubject.id}}/newTopic">Uus teema</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown">Sorteeri <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -19,29 +19,29 @@
       </li>
     </ul>
 
-  </div><!-- /.container-fluid -->
+  </div>
 </nav>
 
 
 <div class="page-content inset">
   <section class="row">
-    <article ng-repeat="topic in activeTopics | orderBy:sortOrder">
+    <article ng-repeat="topic in activeTopics | orderBy:'-datePublished'">
       <header>
-        <a href="#/topic/{{topic.topicId}}">
+        <a href="#/topic={{topic.id}}">
         <h3 class="topicTitle">
           {{topic.title}}
         </h3>
           </a>
         <span class="pubDate">
           postitas {{topic.author}}
-          <time datetime="2014-02-14T23:47+02:00">{{topic.datePublished}}</time>
+          <time>{{topic.datePublished | date:'yyyy-MM-dd HH:mm:ss'}}</time>
         </span>
       </header>
       <p class="articleText">
         {{topic.text}}
       </p>
       <footer>
-        <a href="#/topic/{{topic.topicId}}" class="commentLink">
+        <a href="#/topic={{topic.id}}" class="commentLink">
         {{topic.replies.length}} vastust
           </a>
       </footer>

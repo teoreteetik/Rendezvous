@@ -23,7 +23,7 @@
             <input type="text" class="form-control" placeholder="Otsi" ng-model="subjectSearchString">
           </li>
           <li ng-repeat="subject in subjects | searchFor:subjectSearchString">
-            <a href="#/subject/{{subject.id}}">
+            <a href="#/subject={{subject.id}}">
               {{subject.code}}<br>
               {{subject.name}}
             </a>
