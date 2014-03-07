@@ -1,51 +1,58 @@
-<div class="content-header">
-  <h1>
-    <a id="menu-toggle" href="#" class="btn btn-default"><i class="icon-reorder"></i></a>
-    {{activeSubject.name}}
-  </h1>
-</div>
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
+<h1>
+  {{activeSubject.name}}
+</h1>
 
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#/subject={{activeSubject.id}}/newTopic">Uus teema</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown">Sorteeri <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Viimane vastus</a></li>
-          <li><a href="#">Teema kuupäev</a></li>
-          <li><a href="#">Aktiivsus</a></li>
-        </ul>
-      </li>
-    </ul>
-
-  </div>
+<nav class="navbar" id="subjectNav">
+  <ul class="nav navbar-nav">
+    <li class="active">
+      <a href="#/subjects/{{activeSubject.id}}/createTopic">
+        Uus teema
+      </a>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown">
+        Sorteeri <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#">
+            Viimane vastus
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            Teema kuupäev
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            Aktiivsus
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 
+<article data-ng-repeat="topic in activeTopics | orderBy:'-datePublished'">
+  <hr>
+  <header>
+    <a href="#/subjects/{{activeSubject.id}}/topics/{{topic.id}}">
+      <h3 class="topicTitle">
+        {{topic.title}}
+      </h3>
+    </a>
+    <span class="article-meta">
+      postitas {{topic.userName}}
+      <time dateTime="{{topic.datePosted | date:'yyyy-MM-dd'}}">{{topic.datePosted | date:'yyyy-MM-dd HH:mm'}}</time>
+    </span>
+  </header>
 
-<div class="page-content inset">
-  <section class="row">
-    <article ng-repeat="topic in activeTopics | orderBy:'-datePublished'">
-      <header>
-        <a href="#/topic={{topic.id}}">
-        <h3 class="topicTitle">
-          {{topic.title}}
-        </h3>
-          </a>
-        <span class="pubDate">
-          postitas {{topic.author}}
-          <time>{{topic.datePublished | date:'yyyy-MM-dd HH:mm:ss'}}</time>
-        </span>
-      </header>
-      <p class="articleText">
-        {{topic.text}}
-      </p>
-      <footer>
-        <a href="#/topic={{topic.id}}" class="commentLink">
-        {{topic.replies.length}} vastust
-          </a>
-      </footer>
-      <hr>
-    </article>
-  </section>
-</div>
+  <div class="articleText" data-ng-bind-html="topic.textHtml | toTrusted"></div><!--TODO nope -->
+
+  <footer>
+    <a href="#/subjects/{{activeSubject.id}}/topics/{{topic.id}}" class="commentLink">
+      {{topic.commentCount}} vastust
+    </a>
+  </footer>
+</article>

@@ -12,10 +12,16 @@
   <context:property-placeholder location="/WEB-INF/db.properties"/>
   
   <bean id="dataSource" class="${db.dataSourceClassName}">
-  	<property name="driverClassName" value="${db.driverClassName}"/>
-  	<property name="url" value="${db.url}"/>
-  	<property name="username" value="${db.username}"/>
+  	<property name="serverName" value="${db.serverName}"/>
+    <property name="portNumber" value="${db.portNumber}"/>
+    <property name="databaseName" value="${db.databaseName}"/>
+  	<property name="user" value="${db.user}"/>
   	<property name="password" value="${db.password}"/>
-  </bean>
+  </bean>   
+    
+  <bean class="com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON"/>
+  <bean class="com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider" scope="singleton"/>
+  <bean class="com.wordnik.swagger.jaxrs.listing.ResourceListingProvider" scope="singleton"/>
+  <bean class="ee.teoreteetik.tt.rest.config.SwaggerConfigurer" init-method="init"/>   
 
   </beans>

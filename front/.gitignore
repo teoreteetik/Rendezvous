@@ -1,7 +1,2 @@
-logs/*
-!.gitkeep
-node_modules/
-tmp
-.DS_Store
-.idea
-warbuild/*
+war/*
+.idea/**

@@ -1,6 +1,6 @@
 package ee.teoreteetik.tt.service.impl;
 
-import ee.teoreteetik.tt.dao.UserDAO;
+import ee.teoreteetik.tt.dao.impl.UserDAO;
 import ee.teoreteetik.tt.model.User;
 import ee.teoreteetik.tt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

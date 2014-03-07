@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
+//NOT IMPLEMENTED
 @Path("/users")
 public class UserRestService {
 
@@ -19,6 +20,5 @@ public class UserRestService {
   public User getDefaultUserInJSON() {
     User user = userService.getById(1L);
     return user;
-
   }
 }

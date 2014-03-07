@@ -1,56 +1,84 @@
 <!DOCTYPE html>
-<html lang="et" ng-app="ngApp">
+<html lang="et" data-ng-app="ngApp">
 
 <head>
   <meta charset="utf-8">
-  <title>Randevuu</title>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="bootstrap/css/yeti-bootstrap.min.css">
-  <link href="bootstrap/css/simple-sidebar.css" rel="stylesheet">
-
+  <title>rendezvous</title>
+  <link rel="stylesheet" href="lib/boostrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/boostrap/themes/yeti-bootstrap.min.css">
+  <link rel="stylesheet" href="css/custom.css">
 </head>
 
 <body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" data-ng-controller="SubjectController">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand"  href="/front">rendezvous</a>
+      </div>
 
-  <div id="wrapper" ng-controller="SubjectCtrl">
-
-    <aside id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <li class="sidebar-brand">
-            <a href="#/login">Logi sisse</a>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li class="menuDropdown">
+            <select id="subjectDropdown"
+                    data-placeholder="Vali aine"
+                    data-ng-model="selectedSubject"
+                    data-ng-change="updateSubjectView(selectedSubject)"
+                    data-ng-options="s.name for s in semesterSubjects">
+            </select>
           </li>
-          <li id="subjectSearch">
-            <input type="text" class="form-control" placeholder="Otsi" ng-model="subjectSearchString">
+          <li class="menuDropdown">
+            <select
+                    id="semesterDropdown"
+                    data-ng-model="selectedSemester"
+                    data-ng-change="updateSubjectDropdown(selectedSemester)"
+                    data-ng-options="s.text for s in semesters">
+            </select>
           </li>
-          <li ng-repeat="subject in subjects | searchFor:subjectSearchString">
-            <a href="#/subject={{subject.id}}">
-              {{subject.code}}<br>
-              {{subject.name}}
-            </a>
+          <li>
+            <a href="#subjects/createSubject"><span class="glyphicon glyphicon-plus"></span></a>
           </li>
         </ul>
-    </aside>
 
-    <div id="page-content-wrapper" ng-view>
-
-  </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#config"><span class="glyphicon glyphicon-cog"></span> Seaded</a></li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
+  <div class="container">
+    <section class="col-md-9" data-ng-view>
+
+    </section>
+
+    <aside class="col-md-3">
+      {{activeSubject.name}}
+    </aside>
+  </div>
+
+  <script src="lib/jquery/jquery-1.10.2.js"></script>
   <script src="lib/angular/angular.min.js"></script>
-  <script src="js/app.js"></script>
   <script src="lib/angular/angular-route.js"></script>
-  <script src="js/controllers/TopicCtrl.js"></script>
-  <script src="js/controllers/SubjectCtrl.js"></script>
-
-  <script src="bootstrap/js/jquery-1.10.2.js"></script>
-  <script src="bootstrap/js/bootstrap.js"></script>
-
-  <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("active");
-    });
-  </script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <script src="lib/underscore/underscore-min.js"></script>
+  <script src="lib/restangular/restangular.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/TopicController.js"></script>
+  <script src="js/controllers/SubjectController.js"></script>
+  <script src="js/controllers/NewTopicController.js"></script>
+  <script src="js/controllers/NewSubjectController.js"></script>
+  <script src="js/services/LoginService.js"></script>
+  <script src="js/services/SubjectService.js"></script>
+  <script src="js/services/TopicService.js"></script>
+  <script src="lib/marked/marked.js"></script>
+  <script src="lib/boostrap/js/bootstrap.js"></script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 </body>
 </html>

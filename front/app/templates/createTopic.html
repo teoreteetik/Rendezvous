@@ -1,0 +1,43 @@
+<div class="page-content inset">
+  <div>
+    <h1>
+      {{topic.title}}
+    </h1>
+  </div>
+
+  <div class="preview" id="marked-mathjax-preview"></div>
+  <div class="preview" id="marked-mathjax-preview-buffer"></div>
+
+  <form>
+    <fieldset>
+      <legend>
+        Uus teema
+      </legend>
+      <div class="form-group">
+        <label for="topicTitle">
+          Pealkiri:
+        </label>
+        <input type="text" name="topicTitle" id="topicTitle" class="form-control" data-ng-model="topic.title">
+      </div>
+      <div class="form-group">
+        <label for="previewText">
+          Sisu
+        </label>
+          <textarea id="previewText"
+                    onkeyup="Preview.Update()"
+                    name="topicText"
+                    data-ng-model="topic.textPlain"
+                    class="form-control"
+                    rows="10"></textarea>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" data-ng-model="topic.anonymous">
+          Anonüümus
+        </label>
+      </div>
+      <button class="btn btn-primary" data-ng-click="createTopic(topic)">Postita</button>
+    </fieldset>
+  </form>
+</div>
+<script src="lib/livepreview.js"></script>

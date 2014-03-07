@@ -1,10 +1,14 @@
 package ee.teoreteetik.tt.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Subject {
   private Long id;
-  private String code;
   private String name;
-  private Long year;
+  private String code;
+  private int year;
+  private int semester;
 
   public Long getId() {
     return id;
@@ -30,11 +34,19 @@ public class Subject {
     this.name = name;
   }
 
-  public Long getYear() {
+  public int getYear() {
     return year;
   }
 
-  public void setYear(Long year) {
+  public void setYear(int year) {
     this.year = year;
+  }
+
+  public int getSemester() {
+    return semester;
+  }
+
+  public void setSemester(int semester) {
+    this.semester = semester;
   }
 }

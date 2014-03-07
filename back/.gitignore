@@ -1,7 +1,11 @@
 *.class
-.classpath
 *.jar
+*.war
+*.iml
 .gradle/**
 bin/**
+build/**
 db.properties
-*.war
+.classpath
+.settings/**
+/bin

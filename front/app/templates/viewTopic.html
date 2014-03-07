@@ -2,69 +2,65 @@
   <section class="row">
     <article>
       <header>
-          <h3 class="topicTitle">
-            {{activeTopic.title}}
-          </h3>
+        <h3 class="topicTitle">
+          {{activeTopic.title}}
+        </h3>
         <span class="pubDate">
-          postitas {{topic.author}}
-          <time datetime="">{{activeTopic.datePublished | date:'yyyy-MM-dd HH:mm:ss'}}</time>
+          postitas {{activeTopic.userName}}
+          <time dateTime="{{activeTopic.datePublished | date:'yyyy-MM-dd'}}">{{activeTopic.datePublished | date:'yyyy-MM-dd HH:mm'}}</time>
         </span>
       </header>
-      <p class="articleText">
-        {{activeTopic.text}}
-      </p>
+      <div class="articleText" data-ng-bind-html="activeTopic.textHtml | toTrusted"><!--TODO nopenopenope -->
+      </div>
     </article>
 
-
-    <h4 style="margin-top:40px;">
-      Kommentaarid ({{activeTopic.replies.length}})
+    <h4 class="mainHeading">
+      Kommentaarid ({{activeTopic.commentCount}})
     </h4>
-    <article ng-repeat="reply in activeTopic.replies | orderBy:'-upvoteCount'" class="panel panel-default">
 
+    <article data-ng-repeat="comment in comments.replies | orderBy:'-upvoteCount'" class="panel panel-default">
       <div class="panel-body">
-          <div class="thanksCount col-md-2">
-            <p>{{reply.upvoteCount}} tänu</p>
-            <button ng-disabled="disabled" class="button" ng-click="upvote(reply);disabled=true">Aitäh</button>
-          </div>
+        <div class="col-md-2">
+          <p>{{reply.upvoteCount}} tänu</p>
+          <button data-ng-disabled="disabled" class="button" data-ng-click="upvote(comment);disabled=true">Aitäh</button>
+        </div>
         <p class="col-md-10">
           {{reply.text}}
         </p>
-        </div>
-
-      <div class="panel-footer">
-        {{reply.author}}
-        <span class="pubDate">
-          <time datetime="">{{reply.datePublished}}</time>
-        </span>
       </div>
 
-
+      <div class="article-meta">
+        {{comment.author}}
+        <span class="pubDate">
+          <time dateTime="{{comment.datePublished | date:'yyyy-MM-dd'}}">{{comment.datePublished | date:'yyyy-MM-dd HH:mm'}}</time>
+        </span>
+      </div>
     </article>
-
-
 
     <form name="replyForm">
       <fieldset>
         <legend>Vasta</legend>
           <pre>
-    {{reply.text}}
-</pre>
+            {{reply.text}}
+          </pre>
         <div class="form-group">
           <label for="topicText">Sisu</label>
-          <textarea id="topicText" name="topicText" class="form-control" rows="10" ng-model="reply.text"></textarea>
+          <textarea id="topicText"
+                    name="topicText"
+                    class="form-control"
+                    rows="10"
+                    data-ng-model="reply.text"></textarea>
         </div>
         <div class="checkbox">
-          <label><input type="checkbox">Anonüümus</label>
-
+          <label>
+            <input type="checkbox">
+            Anonüümus
+          </label>
         </div>
-        <button class="btn btn-primary" ng-click="addReply(reply)">Vasta
-
-
-
+        <button class="btn btn-primary" data-ng-click="addReply(reply)">
+          Vasta
         </button>
       </fieldset>
     </form>
-
-
   </section>
 </div>

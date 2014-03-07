@@ -1,3 +1,6 @@
-db.userName=
+db.dataSourceClassName=org.postgresql.ds.PGPoolingDataSource
+db.serverName=
+db.portNumber=
+db.databaseName=
+db.user=
 db.password=
-db.connectionString=
