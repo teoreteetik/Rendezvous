@@ -4,7 +4,7 @@ import ee.teoreteetik.tt.dao.impl.SubjectDAO;
 import ee.teoreteetik.tt.model.Subject;
 import ee.teoreteetik.tt.service.SubjectService;
 import java.util.List;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

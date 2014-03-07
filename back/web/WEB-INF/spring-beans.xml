@@ -18,10 +18,5 @@
   	<property name="user" value="${db.user}"/>
   	<property name="password" value="${db.password}"/>
   </bean>   
-    
-  <bean class="com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON"/>
-  <bean class="com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider" scope="singleton"/>
-  <bean class="com.wordnik.swagger.jaxrs.listing.ResourceListingProvider" scope="singleton"/>
-  <bean class="ee.teoreteetik.tt.rest.config.SwaggerConfigurer" init-method="init"/>   
 
   </beans>
