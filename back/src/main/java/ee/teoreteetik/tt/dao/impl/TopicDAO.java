@@ -51,18 +51,21 @@ public class TopicDAO extends JdbcDaoSupport {
   }
 
   public Long create(Topic topic) {
-    String sql = "INSERT INTO topic (title, text_plain, text_html, anonymous, subject_id, user_id, date_posted) "
-        + "       VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id";
-    Long id = getJdbcTemplate().queryForLong(
-        sql,
-        new Object[] {  topic.getTitle(), 
-                        topic.getTextPlain(),
-                        topic.getTextHtml(), 
-                        topic.isAnonymous(),
-                        topic.getSubjectId(),
-                        topic.getUserId(), 
-                        topic.getDatePosted()
-        });
+    String publicationSql = "INSERT INTO publication (text_plain, text_html, anonymous, user_id, date_posted) VALUES (?, ?, ?, ?, ?) RETURNING id";
+    Long id = getJdbcTemplate().queryForLong(publicationSql, new Object[] {
+        topic.getTextPlain(),
+        topic.getTextHtml(),
+        topic.isAnonymous(),
+        topic.getUserId(),
+        topic.getDatePosted()
+    });
+
+    String topicSql = "INSERT INTO topic (publication_id, title, subject_id) VALUES (?, ?, ?)";
+    getJdbcTemplate().update(topicSql, new Object[] {
+        id,
+        topic.getTitle(),
+        topic.getSubjectId()
+    });
     return id;
   }
 }

@@ -3,7 +3,6 @@ ngApp.controller('NewTopicController', ['$scope', '$route', '$routeParams','$loc
   function NewTopicController($scope, $route, $routeParams, $location, SubjectService, TopicService){
 
     $scope.createTopic = function(topic){
-      console.log(topic);
       topic.subjectId = $routeParams.subjectId;
       topic.userId = 1;
       topic.datePosted = new Date();

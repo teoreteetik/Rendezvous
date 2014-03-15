@@ -53,13 +53,12 @@ public class SubjectDAO extends JdbcDaoSupport {
   }
 
   public Long create(Subject subject) {
-    Long nextId = getJdbcTemplate().queryForLong("SELECT nextval('subject_id_seq')");
-    String sql = "INSERT INTO subject (id, name, code, semester_id) VALUES (?, ?, ?, ?, ?, ?)";
-    getJdbcTemplate().update(sql, new Object[] { nextId,
+    String sql = "INSERT INTO subject (name, code, semester_id) VALUES (?, ?, ?) RETURNING id";
+    Long id = getJdbcTemplate().queryForLong(sql, new Object[] {
         subject.getName(),
         subject.getCode(),
         subject.getSemesterId() });
-    return nextId;
+    return id;
   }
 
   public List<Semester> getSemesters() {
