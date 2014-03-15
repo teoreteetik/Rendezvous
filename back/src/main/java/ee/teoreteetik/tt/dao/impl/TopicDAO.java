@@ -20,51 +20,17 @@ public class TopicDAO extends JdbcDaoSupport {
   }
 
   public List<Topic> loadSubjectTopics(Long subjectId) {
-    String sql = "SELECT "
-        + "         t.id, " 
-        + "         t.title, "
-        + "         t.text_plain,"
-        + "         t.text_html, " 
-        + "         t.subject_id, "
-        + "         t.anonymous, " 
-        + "         t.user_id, "
-        + "         t.date_posted, "
-        + "         u.name, "
-        + "         COUNT(c.id) AS comment_count "
-        + "       FROM   topic t "
-        + "         LEFT JOIN users u ON t.user_id = u.id "
-        + "         LEFT JOIN comment c ON c.topic_id = t.id "
-        + "       WHERE  t.subject_id = ? " 
-        + "       GROUP  BY t.id, "
-        + "                 u.name "
-        + "       ORDER BY t.date_posted DESC";
+    String sql = "SELECT * FROM v_topic WHERE subject_id = ?";
     List<Topic> topics = getJdbcTemplate().query(sql,
         new Object[] { subjectId }, new TopicRowMapper());
     return topics;
   }
 
   public Topic loadById(Long topicId) {
-    String sql = "SELECT"
-        + "         t.id, "
-        + "         t.title,"
-        + "         t.text_plain,"
-        + "         t.text_html,"
-        + "         t.anonymous,"
-        + "         t.subject_id,"
-        + "         t.user_id, "
-        + "         t.date_posted,"
-        + "         u.name,  "
-        + "         COUNT(c.id) AS comment_count "
-        + "       FROM topic t "
-        + "         LEFT JOIN users u ON t.user_id = u.id "
-        + "         LEFT JOIN comment c ON c.topic_id = t.id "
-        + "       WHERE t.id = ? "
-        + "       GROUP  BY t.id,"
-        + "                 u.name";
+    String sql = "SELECT * FROM v_topic WHERE id = ?";
     return DataAccessUtils.singleResult(getJdbcTemplate().query(sql,
         new Object[] { topicId }, new TopicRowMapper()));
   }
-
 
   private class TopicRowMapper implements ParameterizedRowMapper<Topic> {
     @Override
@@ -85,17 +51,18 @@ public class TopicDAO extends JdbcDaoSupport {
   }
 
   public Long create(Topic topic) {
-    Long nextId = getJdbcTemplate().queryForLong("SELECT nextval('topic_id_seq')");
-    String sql = "INSERT INTO topic (id, title, text_plain, text_html, anonymous, subject_id, user_id, date_posted) "
-        + "       VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    getJdbcTemplate().update(sql, new Object[] {  nextId, 
-                                                  topic.getTitle(),
-                                                  topic.getTextPlain(),
-                                                  topic.getTextHtml(),
-                                                  topic.isAnonymous(), 
-                                                  topic.getSubjectId(),
-                                                  topic.getUserId(),
-                                                  topic.getDatePosted() });
-    return nextId;
+    String sql = "INSERT INTO topic (title, text_plain, text_html, anonymous, subject_id, user_id, date_posted) "
+        + "       VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id";
+    Long id = getJdbcTemplate().queryForLong(
+        sql,
+        new Object[] {  topic.getTitle(), 
+                        topic.getTextPlain(),
+                        topic.getTextHtml(), 
+                        topic.isAnonymous(),
+                        topic.getSubjectId(),
+                        topic.getUserId(), 
+                        topic.getDatePosted()
+        });
+    return id;
   }
 }

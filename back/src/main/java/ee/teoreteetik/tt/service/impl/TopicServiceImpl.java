@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 @Service("topicService")
 public class TopicServiceImpl implements TopicService {
 
-  @Autowired
-  private TopicDAO topicDAO;
+  @Autowired private TopicDAO topicDAO;
 
   @Override
   public List<Topic> getBySubjectId(Long subjectId) {
@@ -30,7 +29,6 @@ public class TopicServiceImpl implements TopicService {
       topic.setTextPlain(null);
     }
     return topic;
-
   }
 
   @Override

@@ -1,5 +1,6 @@
 package ee.teoreteetik.tt.rest;
 
+import ee.teoreteetik.tt.model.Semester;
 import ee.teoreteetik.tt.model.Subject;
 import ee.teoreteetik.tt.model.Topic;
 import ee.teoreteetik.tt.service.SubjectService;
@@ -20,18 +21,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Produces(MediaType.APPLICATION_JSON)
 public class SubjectRestService {
 
-  @Autowired
-  private SubjectService subjectService;
-  @Autowired
-  private TopicService topicService;
+  @Autowired private SubjectService subjectService;
+  @Autowired private TopicService   topicService;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public List<Subject> getSubjectsBySemester(
-      @QueryParam(value = "year") final int year,
-      @QueryParam(value = "semester") final int semester) {
-    List<Subject> subjects = subjectService.getSubjectsBySemester(year,
-        semester);
+      @QueryParam(value = "year") final Integer year,
+      @QueryParam(value = "semesterNumber") final Integer semesterNumber) {
+    Semester semester = new Semester();
+    semester.setYear(year);
+    semester.setSemesterNumber(semesterNumber);
+    List<Subject> subjects = subjectService.getSubjectsBySemester(semester);
     return subjects;
   }
 

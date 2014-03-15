@@ -1,8 +1,10 @@
 package ee.teoreteetik.tt.dao.impl;
 
+import ee.teoreteetik.tt.model.Semester;
 import ee.teoreteetik.tt.model.Subject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +20,19 @@ public class SubjectDAO extends JdbcDaoSupport {
   public SubjectDAO(DataSource ds) {
     setDataSource(ds);
   }
-  
-  public List<Subject> loadSubjectsBySemester(int year, int semester) {
-    String sql = "SELECT * FROM subject s";
-    if (year != 0 && semester != 0) {
-      sql += " WHERE s.year = ? AND s.semester = ?"; //TODO
-      return getJdbcTemplate().query(sql, new Object[] { year, semester }, new SubjectRowMapper());
+
+  public List<Subject> loadSubjectsBySemester(Semester semester) {
+    List<Object> params = new ArrayList<>();
+    StringBuilder sql = new StringBuilder("SELECT * FROM subject su INNER JOIN semester se on su.semester_id = se.id WHERE 1 = 1");
+    if (semester.getYear() != null) {
+      sql.append(" AND se.year = ?");
+      params.add(semester.getYear());
     }
-    return getJdbcTemplate().query(sql, new Object[] {}, new SubjectRowMapper());
+    if (semester.getSemesterNumber() != null) {
+      sql.append(" AND se.semester_number = ?");
+      params.add(semester.getSemesterNumber());
+    }
+    return getJdbcTemplate().query(sql.toString(), params.toArray(), new SubjectRowMapper());
   }
 
   public Subject loadSubjectById(Long subjectId) {
@@ -40,20 +47,33 @@ public class SubjectDAO extends JdbcDaoSupport {
       subject.setId(rs.getLong("id"));
       subject.setName(rs.getString("name"));
       subject.setCode(rs.getString("code"));
-      subject.setYear(rs.getInt("year"));
-      subject.setSemester(rs.getInt("semester"));
+      subject.setSemesterId(rs.getLong("semester_id"));
       return subject;
     }
   }
 
   public Long create(Subject subject) {
     Long nextId = getJdbcTemplate().queryForLong("SELECT nextval('subject_id_seq')");
-    String sql = "INSERT INTO subject (id, name, code, year, semester) VALUES (?, ?, ?, ?, ?)";
-    getJdbcTemplate().update(sql, new Object[] {  nextId,
-                                                  subject.getName(), 
-                                                  subject.getCode(),
-                                                  subject.getYear(), 
-                                                  subject.getSemester() });
+    String sql = "INSERT INTO subject (id, name, code, semester_id) VALUES (?, ?, ?, ?, ?, ?)";
+    getJdbcTemplate().update(sql, new Object[] { nextId,
+        subject.getName(),
+        subject.getCode(),
+        subject.getSemesterId() });
     return nextId;
+  }
+
+  public List<Semester> getSemesters() {
+    String sql = "SELECT * FROM semester ORDER BY year DESC, semester_number DESC";
+    return getJdbcTemplate().query(sql, new Object[] {}, new ParameterizedRowMapper<Semester>() {
+      @Override
+      public Semester mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Semester semester = new Semester();
+        semester.setId(rs.getLong("id"));
+        semester.setYear(rs.getInt("year"));
+        semester.setSemesterNumber(rs.getInt("semester_number"));
+        semester.setText(rs.getString("text"));
+        return semester;
+      }
+    });
   }
 }

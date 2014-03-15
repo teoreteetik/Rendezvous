@@ -1,2 +1,3 @@
 war/*
 .idea/**
+node_modules/**

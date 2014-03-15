@@ -12,9 +12,13 @@ ngApp.controller('SubjectController', ['$scope', '$route', '$routeParams','$loca
       $scope.semesterSubjects = SubjectService.getSemesterSubjects(semester.year, semester.semesterNumber);
     }
 
-    $scope.semesters = SubjectService.semesters;
-    $scope.selectedSemester = $scope.semesters[0];
-    $scope.updateSubjectDropdown($scope.semesters[0]);
+    SubjectService.getSemesters().then(function(response){
+      $scope.semesters = response;
+      $scope.selectedSemester = $scope.semesters[0];
+    });
+
+
+
 
     $scope.activeSubject = SubjectService.getSubject($routeParams.subjectId);
     $scope.activeTopics = TopicService.getSubjectTopics($routeParams.subjectId);

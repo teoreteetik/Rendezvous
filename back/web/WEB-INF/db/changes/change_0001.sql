@@ -1,51 +1,52 @@
-create table users(
-    id serial primary key,
-    username varchar(20) not null,
-    name varchar(50)
+CREATE TABLE users(
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(20) NOT NULL,
+  name VARCHAR(50)
 );
 
-create table subject(
-    id serial primary key,
-    name varchar(255) not null,
-    code varchar(100),
-    year smallint not null,
-    semester smallint not null
+CREATE TABLE semester(
+  id SERIAL PRIMARY KEY,
+  year SMALLINT NOT NULL,
+  semester_number SMALLINT NOT NULL CHECK (semester_number = 1 OR semester_number = 2),
+  text VARCHAR(30) NOT NULL 
 );
 
-create table topic(
-    id serial primary key,
-    title varchar(255) not null,
-    text_plain text,
-    text_html text,
-    anonymous boolean not null,
-    subject_id integer not null,
-    user_id integer not null,
-    date_posted timestamp with time zone not null,
-    
-    foreign key (user_id) references users(id),
-    foreign key (subject_id) references subject(id)
+CREATE TABLE subject(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  code VARCHAR(100),
+  semester_id INTEGER NOT NULL,
+  FOREIGN KEY(semester_id) REFERENCES semester(id)
 );
 
-create table comment(
-    id serial primary key,
-    text_plain text,
-    text_html text,
-    anonymous boolean not null,
-    topic_id integer not null,
-    user_id integer not null,
-    date_posted timestamp with time zone not null,
-    
-    foreign key (user_id) references users(id),
-    foreign key (topic_id) references topic(id)
+CREATE TABLE publication(
+  id SERIAL PRIMARY KEY,
+  text_plain TEXT NOT NULL,
+  text_html TEXT NOT NULL,
+  anonymous BOOLEAN NOT NULL,
+  user_id INTEGER NOT NULL,
+  date_posted TIMESTAMP WITH TIME ZONE NOT NULL
 );
 
-create table upvote(
-    id serial primary key not null,
-    user_id integer not null,
-    topic_id integer ,
-    comment_id integer,
-    
-    foreign key (topic_id) references topic(id),
-    foreign key (comment_id) references comment(id)
+CREATE TABLE topic(
+  publication_id INTEGER PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  subject_id INTEGER NOT NULL,
+  FOREIGN KEY(publication_id) REFERENCES publication(id),
+  FOREIGN KEY(subject_id) REFERENCES subject(id)
 );
-alter table upvote add constraint upvote_constraint check(topic_id is null != comment_id is null);
+
+CREATE TABLE comment(
+  publication_id INTEGER PRIMARY KEY,
+  parent_publication_id INTEGER NOT NULL,
+  FOREIGN KEY(publication_id) REFERENCES publication(id),
+  FOREIGN KEY(parent_publication_id) REFERENCES publication(id)
+);
+
+CREATE TABLE upvote(
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  publication_id INTEGER NOT NULL,  
+  FOREIGN KEY(publication_id) REFERENCES publication(id),
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
