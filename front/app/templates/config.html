@@ -1,0 +1,19 @@
+<div class="page-content inset">
+  <span>{{message}}</span>
+  <form>
+    <fieldset>
+      <legend>
+        Seaded
+      </legend>
+      <div class="form-group">
+        <label for="username">
+          Kasutajanimi
+        </label>
+        <input type="text" name="username" id="username" class="form-control" data-ng-model="user.username">
+      </div>
+      <button class="btn btn-primary"  data-ng-click="update()">
+        Muuda
+      </button>
+    </fieldset>
+  </form>
+</div>

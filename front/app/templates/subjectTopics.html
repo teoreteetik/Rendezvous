@@ -4,7 +4,7 @@
 
 <nav class="navbar" id="subjectNav">
   <ul class="nav navbar-nav">
-    <li class="active">
+    <li class="active" data-ng-show="isLoggedIn()">
       <a href="#/subjects/{{activeSubject.id}}/createTopic">
         Uus teema
       </a>

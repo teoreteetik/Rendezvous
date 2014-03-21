@@ -1,4 +1,4 @@
-package ee.teoreteetik.tt.dao.impl;
+package ee.teoreteetik.tt.internal.dao;
 
 import ee.teoreteetik.tt.model.Topic;
 import java.sql.ResultSet;
@@ -43,7 +43,7 @@ public class TopicDAO extends JdbcDaoSupport {
       topic.setAnonymous(rs.getBoolean("anonymous"));
       topic.setSubjectId(rs.getLong("subject_id"));
       topic.setUserId(rs.getLong("user_id"));
-      topic.setUserName(rs.getString("name"));
+      topic.setUserName(rs.getString("username"));
       topic.setDatePosted(rs.getTimestamp("date_posted"));
       topic.setCommentCount(rs.getInt("comment_count"));
       return topic;

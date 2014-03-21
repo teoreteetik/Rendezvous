@@ -1,4 +1,4 @@
-package ee.teoreteetik.tt.service;
+package ee.teoreteetik.tt.internal.service;
 
 import ee.teoreteetik.tt.model.Semester;
 import ee.teoreteetik.tt.model.Subject;

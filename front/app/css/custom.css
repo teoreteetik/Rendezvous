@@ -1,7 +1,7 @@
 body{
   padding-top:51px;
 }
-a:hover{
+a:hover {
   text-decoration:none;
 }
 
@@ -9,32 +9,36 @@ a:hover{
   width: 100%;
 }
 
-li.menuDropdown{
+li.menuDropdown {
   padding: 12px 5px;
 }
 
-select#subjectDropdown{
+select#subjectDropdown {
   width:300px;
 }
 
-.mainHeading{
+.mainHeading {
   margin-top:40px;
 }
 
-.article-meta{
+.article-meta {
   margin: 0;
   font-size: 0.7em;
   color: #888888;
 }
 
-h3.topicTitle{
+h3.topicTitle {
   margin-bottom: 0px;
 }
 
-hr{
+hr {
   margin-top: 0;
 }
 
-#subjectNav{
+#subjectNav {
   margin-bottom: 0;
+}
+
+#messages {
+  list-style-type: none;
 }

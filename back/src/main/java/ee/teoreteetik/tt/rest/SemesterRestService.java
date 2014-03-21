@@ -1,7 +1,7 @@
 package ee.teoreteetik.tt.rest;
 
+import ee.teoreteetik.tt.internal.service.SubjectService;
 import ee.teoreteetik.tt.model.Semester;
-import ee.teoreteetik.tt.service.SubjectService;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

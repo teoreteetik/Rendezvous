@@ -1,8 +1,8 @@
-package ee.teoreteetik.tt.service.impl;
+package ee.teoreteetik.tt.internal.service.impl;
 
-import ee.teoreteetik.tt.dao.impl.TopicDAO;
+import ee.teoreteetik.tt.internal.dao.TopicDAO;
+import ee.teoreteetik.tt.internal.service.TopicService;
 import ee.teoreteetik.tt.model.Topic;
-import ee.teoreteetik.tt.service.TopicService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

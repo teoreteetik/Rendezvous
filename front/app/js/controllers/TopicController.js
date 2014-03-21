@@ -1,8 +1,8 @@
 'use strict';
-ngApp.controller('TopicController', ['$scope', '$route', '$routeParams', 'SubjectService', 'TopicService',
-    function TopicController($scope, $route, $routeParams, SubjectService, TopicService){
-
+ngApp.controller('TopicController',
+  ['$scope', '$routeParams', 'TopicService',
+    function ($scope, $routeParams, TopicService) {
       $scope.activeTopic = TopicService.getTopic($routeParams.topicId, false);
-
-    }]
+    }
+  ]
 );

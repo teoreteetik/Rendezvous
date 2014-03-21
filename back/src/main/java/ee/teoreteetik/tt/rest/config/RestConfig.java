@@ -1,9 +1,11 @@
 package ee.teoreteetik.tt.rest.config;
 
+import ee.teoreteetik.tt.rest.AuthRestService;
 import ee.teoreteetik.tt.rest.SemesterRestService;
 import ee.teoreteetik.tt.rest.SubjectRestService;
 import ee.teoreteetik.tt.rest.TopicRestService;
 import ee.teoreteetik.tt.rest.UserRestService;
+
 import org.glassfish.jersey.server.ResourceConfig;
 
 /**
@@ -16,6 +18,7 @@ public class RestConfig extends ResourceConfig {
     register(SubjectRestService.class);
     register(TopicRestService.class);
     register(SemesterRestService.class);
+    register(AuthRestService.class);
 
   }
 

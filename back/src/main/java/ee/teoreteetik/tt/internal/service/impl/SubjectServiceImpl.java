@@ -1,9 +1,9 @@
-package ee.teoreteetik.tt.service.impl;
+package ee.teoreteetik.tt.internal.service.impl;
 
-import ee.teoreteetik.tt.dao.impl.SubjectDAO;
+import ee.teoreteetik.tt.internal.dao.SubjectDAO;
+import ee.teoreteetik.tt.internal.service.SubjectService;
 import ee.teoreteetik.tt.model.Semester;
 import ee.teoreteetik.tt.model.Subject;
-import ee.teoreteetik.tt.service.SubjectService;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;

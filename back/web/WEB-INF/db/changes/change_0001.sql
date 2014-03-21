@@ -1,7 +1,7 @@
 CREATE TABLE users(
   id SERIAL PRIMARY KEY,
   username VARCHAR(20) NOT NULL,
-  name VARCHAR(50)
+  email VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE semester(

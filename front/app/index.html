@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/custom.css">
 </head>
 
-<body>
+<body data-ng-controller="AuthController">
   <nav class="navbar navbar-inverse navbar-fixed-top" data-ng-controller="SubjectController">
     <div class="container">
       <div class="navbar-header">
@@ -40,25 +40,30 @@
                     data-ng-options="s.text for s in semesters">
             </select>
           </li>
-          <li>
+          <li ng-show="isLoggedIn()">
             <a href="#subjects/createSubject"><span class="glyphicon glyphicon-plus"></span></a>
           </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#config"><span class="glyphicon glyphicon-cog"></span> Seaded</a></li>
+          <li data-ng-show="isLoggedIn()"><a href="#config"><span class="glyphicon glyphicon-cog"></span> Seaded</a></li>
+          <li data-ng-show="!isLoggedIn()"><a href="#" ng-click="login()"><span class="glyphicon glyphicon-log-in"></span> Logi sisse</a></li>
+          <li data-ng-show="isLoggedIn()"><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logi välja</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <div class="container">
-    <section class="col-md-9" data-ng-view>
+    <section  class="col-md-9" data-ng-view>
 
     </section>
 
     <aside class="col-md-3">
-      {{activeSubject.name}}
+      <ul id="messages">
+
+      </ul>
+
     </aside>
   </div>
 
@@ -66,19 +71,27 @@
   <script src="lib/angular/angular.min.js"></script>
   <script src="lib/angular/angular-route.js"></script>
   <script src="lib/angular/angular-resource.js"></script>
+  <script src="lib/angular/angular-cookies.js"></script>
   <script src="lib/underscore/underscore-min.js"></script>
   <script src="lib/restangular/restangular.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers/TopicController.js"></script>
+  <script src="js/controllers/AuthController.js"></script>
+  <script src="js/controllers/LoginController.js"></script>
+  <script src="js/services/UserService.js"></script>
+  <script src="js/controllers/ConfigController.js"></script>
   <script src="js/controllers/SubjectController.js"></script>
   <script src="js/controllers/NewTopicController.js"></script>
   <script src="js/controllers/NewSubjectController.js"></script>
-  <script src="js/services/LoginService.js"></script>
+  <script src="js/services/AuthService.js"></script>
   <script src="js/services/SubjectService.js"></script>
   <script src="js/services/TopicService.js"></script>
   <script src="lib/marked/marked.js"></script>
   <script src="lib/boostrap/js/bootstrap.js"></script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script src="js/topicpush.js"></script>
+  <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
 
 </body>
 </html>

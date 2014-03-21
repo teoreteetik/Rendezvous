@@ -1,4 +1,4 @@
-package ee.teoreteetik.tt.service;
+package ee.teoreteetik.tt.internal.service;
 
 import ee.teoreteetik.tt.model.Topic;
 import java.util.List;

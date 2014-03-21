@@ -1,4 +1,4 @@
-package ee.teoreteetik.tt.dao.impl;
+package ee.teoreteetik.tt.internal.dao;
 
 import ee.teoreteetik.tt.model.Semester;
 import ee.teoreteetik.tt.model.Subject;

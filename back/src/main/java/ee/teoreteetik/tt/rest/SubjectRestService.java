@@ -1,10 +1,10 @@
 package ee.teoreteetik.tt.rest;
 
+import ee.teoreteetik.tt.internal.service.SubjectService;
+import ee.teoreteetik.tt.internal.service.TopicService;
 import ee.teoreteetik.tt.model.Semester;
 import ee.teoreteetik.tt.model.Subject;
 import ee.teoreteetik.tt.model.Topic;
-import ee.teoreteetik.tt.service.SubjectService;
-import ee.teoreteetik.tt.service.TopicService;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

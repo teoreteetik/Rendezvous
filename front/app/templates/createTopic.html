@@ -1,4 +1,5 @@
-<div class="page-content inset">
+
+<div class="page-content inset" data-ng-show="isLoggedIn()">
   <div>
     <h1>
       {{topic.title}}
@@ -8,6 +9,7 @@
   <div class="preview" id="marked-mathjax-preview"></div>
   <div class="preview" id="marked-mathjax-preview-buffer"></div>
 
+  <span>{{message}}</span>
   <form>
     <fieldset>
       <legend>
