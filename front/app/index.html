@@ -40,15 +40,15 @@
                     data-ng-options="s.text for s in semesters">
             </select>
           </li>
-          <li ng-show="isLoggedIn()">
+          <li data-ng-show="isLoggedIn()">
             <a href="#subjects/createSubject"><span class="glyphicon glyphicon-plus"></span></a>
           </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
           <li data-ng-show="isLoggedIn()"><a href="#config"><span class="glyphicon glyphicon-cog"></span> Seaded</a></li>
-          <li data-ng-show="!isLoggedIn()"><a href="#" ng-click="login()"><span class="glyphicon glyphicon-log-in"></span> Logi sisse</a></li>
-          <li data-ng-show="isLoggedIn()"><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logi välja</a></li>
+          <li data-ng-show="!isLoggedIn()"><a href="#" data-ng-click="login()"><span class="glyphicon glyphicon-log-in"></span> Logi sisse</a></li>
+          <li data-ng-show="isLoggedIn()"><a href="#" data-ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logi välja</a></li>
         </ul>
       </div>
     </div>
