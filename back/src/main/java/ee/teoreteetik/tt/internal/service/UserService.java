@@ -1,6 +1,6 @@
 package ee.teoreteetik.tt.internal.service;
 
-import ee.teoreteetik.tt.model.User;
+import ee.teoreteetik.tt.internal.model.User;
 
 public interface UserService {
   User getByEmail(String email);
@@ -8,4 +8,5 @@ public interface UserService {
   Long create(User user);
 
   void update(User user);
+
 }

@@ -3,12 +3,12 @@
              xsi:schemaLocation="http://www.zeroturnaround.com http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd">
 
   <classpath>
-    <dir name="c:\workspace\Rendezvous\back\bin"/>
+    <dir name="c:\workspace\Rendezvous\back"/>
   </classpath>
 
   <web>
     <link target="/">
-      <dir name="c:\workspace\Rendezvous\back\bin"/>
+      <dir name="c:\workspace\Rendezvous\back"/>
     </link>
   </web>
 

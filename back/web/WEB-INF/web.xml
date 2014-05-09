@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  
+
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>/WEB-INF/spring-beans.xml</param-value>
@@ -15,12 +15,12 @@
     <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
     <init-param>
       <param-name>javax.ws.rs.Application</param-name>
-      <param-value>ee.teoreteetik.tt.rest.config.RestConfig</param-value>
+      <param-value>ee.teoreteetik.tt.client.endpoint.rest.config.RestConfig</param-value>
     </init-param>
     
     <init-param>
       <param-name>org.glassfish.jersey.config.property.packages</param-name>
-        <param-value>ee.teoreteetik.tt.rest</param-value>
+      <param-value>ee.teoreteetik.tt.client.endpoint.rest</param-value>
     </init-param>
 
     <init-param>
@@ -35,6 +35,5 @@
     <servlet-name>RestResource</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
-
-
+  
 </web-app>

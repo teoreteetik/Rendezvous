@@ -7,9 +7,11 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+
   <context:annotation-config />
   <context:component-scan base-package="ee.teoreteetik.tt" />
   <context:property-placeholder location="/WEB-INF/db.properties"/>
+
   
   <bean id="dataSource" class="${db.dataSourceClassName}">
   	<property name="serverName" value="${db.serverName}"/>
@@ -17,6 +19,7 @@
     <property name="databaseName" value="${db.databaseName}"/>
   	<property name="user" value="${db.user}"/>
   	<property name="password" value="${db.password}"/>
-  </bean>   
+  </bean>
+
 
   </beans>

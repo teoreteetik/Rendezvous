@@ -1,0 +1,58 @@
+<section class="row">
+  <article>
+    <header>
+      <a href="#/semesters/{{navState.selectedSemesterId}}/subjects/{{navState.selectedSubjectId}}/topics/{{topic.id}}">
+        <h3 class="topicTitle">{{topic.title}}</h3>
+      </a>
+      <span class="article-meta">
+        postitas {{topic.username}}
+        <time dateTime="{{topic.datePosted | date:'yyyy-MM-dd'}}">{{topic.datePosted | date:'yyyy-MM-dd HH:mm'}}</time>
+      </span>
+    </header>
+    <div class="articleText" data-ng-bind-html="topic.textHtml | toTrusted"><!--TODO nopenopenope -->
+    </div>
+  </article>
+
+  <h4 class="mainHeading">Vastused ({{topic.comments.length}})</h4>
+
+  <article data-ng-repeat="comment in topic.comments | orderBy:'-upvoteCount'" class="panel panel-default">
+    <div class="panel-body">
+        <!--<div class="col-md-2">
+          <p>{{comment.upvoteCount}} tänu</p>
+          <button data-ng-disabled="disabled" class="button" data-ng-click="upvote(comment);disabled=true">Aitäh</button>
+        </div>-->
+      <p class="col-md-12" data-ng-bind-html="comment.textHtml | toTrusted">
+      </p>
+    </div>
+    <span class="article-meta">
+      postitas {{comment.username}}
+      <time dateTime="{{comment.datePosted | date:'yyyy-MM-dd'}}">{{comment.datePosted | date:'yyyy-MM-dd HH:mm'}}</time>
+    </span>
+  </article>
+
+  <form name="replyForm" data-ng-show="auth.hasPrivilege('ADD_COMMENT')">
+    <fieldset>
+      <legend>Vasta</legend>
+      <div class="preview" id="marked-mathjax-preview"></div>
+      <div class="preview" id="marked-mathjax-preview-buffer"></div>
+      <div class="form-group">
+        <label for="previewText">Sisu</label>
+        <textarea id="previewText"
+                  onkeyup="Preview.Update()"
+                  name="commentText"
+                  data-ng-model="comment.textPlain"
+                  class="form-control"
+                  rows="10"></textarea>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" data-ng-model="comment.anonymous">Anonüümus
+        </label>
+      </div>
+      <button class="btn btn-primary" data-ng-click="addComment(comment)">Vasta</button>
+    </fieldset>
+  </form>
+</section>
+<script>
+  Preview.Init();Preview.Update();
+</script>

@@ -1,0 +1,53 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+  <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand"  href="/front/#/">rendezvous</a>
+    </div>
+
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li class="menuDropdown">
+          <select data-ui-select2="subjectDropdown"
+              data-ng-model="navState.selectedSubjectId"
+              data-placeholder="Vali aine"
+              data-ng-change="navStateHandler.goToSubjectTopics()">
+            <option value=""></option>
+            <option ng-repeat="subject in navState.subjects" value="{{subject.id}}">{{subject.name}} ({{subject.code}})</option>
+          </select>
+        </li>
+        <li class="menuDropdown">
+          <select data-ui-select2="semesterDropdown"
+              data-ng-model="navState.selectedSemesterId"
+              data-placeholder="Vali semester"
+              data-ng-change="navStateHandler.goToSubjectCloud()">
+            <option value=""></option>
+            <option ng-repeat="semester in navState.semesters" value="{{semester.id}}">{{semester.text}}</option>
+          </select>
+        </li>
+        <li data-ng-show="auth.hasPrivilege('ADD_SUBJECT')">
+          <a href="#/addSubject"><span class="glyphicon glyphicon-plus"></span></a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li data-ng-show="auth.isLoggedIn()"><a href="#config"><span class="glyphicon glyphicon-cog"></span> Seaded</a></li>
+        <li data-ng-show="!auth.isLoggedIn()"><a href="#" data-ng-click="auth.login()"><span class="glyphicon glyphicon-log-in"></span> Logi sisse</a></li>
+        <li data-ng-show="auth.isLoggedIn()"><a href="#" data-ng-click="auth.logout()"><span class="glyphicon glyphicon-log-out"></span> Logi välja</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <section  class="col-md-9" data-ui-view>
+  </section>
+  <aside class="col-md-3">
+    <ul id="messages">
+    </ul>
+  </aside>
+</div>

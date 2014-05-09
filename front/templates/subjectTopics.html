@@ -1,0 +1,34 @@
+<nav class="navbar" id="subjectNav">
+  <ul class="nav navbar-nav">
+    <li class="active" data-ng-show="auth.hasPrivilege('ADD_TOPIC')">
+      <a href="#/semesters/{{navState.selectedSemesterId}}/subjects/{{navState.selectedSubjectId}}/addTopic">Uus teema</a>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown">Sorteeri <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Viimane vastus</a></li>
+        <li><a href="#">Teema kuupäev</a></li>
+        <li><a href="#">Aktiivsus</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<article data-ng-repeat="topic in topics | orderBy:'-datePublished'">
+  <hr>
+  <header>
+    <a href="#/semesters/{{navState.selectedSemesterId}}/subjects/{{navState.selectedSubjectId}}/topics/{{topic.id}}">
+      <h3 class="topicTitle">{{topic.title}}</h3>
+    </a>
+    <span class="article-meta">
+      postitas {{topic.username}}
+      <time dateTime="{{topic.datePosted | date:'yyyy-MM-dd'}}">{{topic.datePosted | date:'yyyy-MM-dd HH:mm'}}</time>
+    </span>
+  </header>
+  <div class="articleText" data-ng-bind-html="topic.textHtml | toTrusted"></div><!--TODO nope -->
+  <footer>
+    <a href="#/semesters/{{navState.selectedSemesterId}}/subjects/{{navState.selectedSubjectId}}/topics/{{topic.id}}" class="commentLink">
+      {{topic.commentCount}} vastust
+    </a>
+  </footer>
+</article>

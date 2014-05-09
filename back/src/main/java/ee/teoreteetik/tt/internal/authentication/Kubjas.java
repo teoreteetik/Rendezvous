@@ -1,6 +1,6 @@
 package ee.teoreteetik.tt.internal.authentication;
 
-import ee.teoreteetik.tt.model.User;
+import ee.teoreteetik.tt.internal.model.User;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -12,7 +12,7 @@ public class Kubjas {
     activeTokens.put(uuid, auth);
   }
 
-  private static AuthToken getToken(String uuid) {
+  public static AuthToken getToken(String uuid) {
     return activeTokens.get(uuid);
   }
 
@@ -39,4 +39,5 @@ public class Kubjas {
     }
     return null;
   }
+
 }

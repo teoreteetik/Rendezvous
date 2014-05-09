@@ -1,0 +1,18 @@
+<div class="page-content inset" data-ng-show="auth.hasPrivilege('ADD_SUBJECT')">
+  <fieldset>
+    <legend>Aine lisamine</legend>
+    <div class="form-group">
+      <label for="subjectName">Aine nimetus</label>
+      <input type="text" name="subjectName" id="subjectName" class="form-control" data-ng-model="subject.name">
+    </div>
+    <div class="form-group">
+      <label for="subjectCode">Aine kood</label>
+      <input type="text" name="subjectCode" id="subjectCode" class="form-control" data-ng-model="subject.code">
+    </div>
+    <div class="form-group">
+      <label for="semester">Semester</label>
+      <select id="semester" data-ng-model="selectedSemester" data-ng-change="updateSubjectDropdown(selectedSemester)" data-ng-options="s.text for s in $parent.navState.semesters"></select>
+    </div>
+    <button class="btn btn-primary" data-ng-click="addSubject(subject)">Lisa</button>
+  </fieldset>
+</div>

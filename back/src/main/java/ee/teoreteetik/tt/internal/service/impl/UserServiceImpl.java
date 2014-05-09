@@ -1,16 +1,19 @@
 package ee.teoreteetik.tt.internal.service.impl;
 
 import ee.teoreteetik.tt.internal.dao.UserDAO;
+
 import ee.teoreteetik.tt.internal.service.UserService;
-import ee.teoreteetik.tt.model.User;
+import ee.teoreteetik.tt.internal.model.User;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-  @Autowired UserDAO userDAO;
+  @Resource
+  private UserDAO userDAO;
 
   @Override
   public User getByEmail(String email) {
@@ -27,5 +30,7 @@ public class UserServiceImpl implements UserService {
     Validate.notBlank(user.getUsername());
     userDAO.update(user);
   }
+
+
 
 }

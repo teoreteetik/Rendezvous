@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'war'
 
 sourceCompatibility = 1.7
@@ -24,6 +25,8 @@ dependencies {
 	compile('org.glassfish.jersey.ext:jersey-spring3:2.5.1')
 	compile('org.springframework:spring-jdbc:3.2.0.RELEASE')
 	compile('com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.2.3')
+	compile('org.apache.logging.log4j:log4j-api:2.0-rc1')
+  	compile('org.apache.logging.log4j:log4j-core:2.0-rc1')
 	providedCompile('javax.servlet:javax.servlet-api:3.+')
 	providedCompile('javax.websocket:javax.websocket-api:1.0')
 	testCompile('junit:junit:4.+')
@@ -47,7 +50,7 @@ war {
     	into('WEB-INF')
     }
     from('conf/teoreteetik'){
-    	include 'rebel.xml'
+    	include '*.xml'
     	into('WEB-INF/classes')
     }
 }

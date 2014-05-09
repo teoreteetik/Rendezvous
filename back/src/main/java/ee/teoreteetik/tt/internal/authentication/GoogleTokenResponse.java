@@ -12,5 +12,4 @@ public class GoogleTokenResponse {
   @Getter @Setter String email;
   @Getter @Setter String verified_email;
   @Getter @Setter String access_type;
-
 }

@@ -2,9 +2,10 @@ package ee.teoreteetik.tt.internal.authentication.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ee.teoreteetik.tt.internal.authentication.GoogleTokenResponse;
+import ee.teoreteetik.tt.internal.authentication.Privilege;
 import ee.teoreteetik.tt.internal.authentication.service.AuthService;
 import ee.teoreteetik.tt.internal.service.UserService;
-import ee.teoreteetik.tt.model.User;
+import ee.teoreteetik.tt.internal.model.User;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,13 +13,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.HashSet;
+import java.util.Set;
+
+import lombok.Setter;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service("googleAuthService")
 public class GoogleAuthService implements AuthService {
 
-  @Autowired private UserService userService;
+  @Resource private UserService userService;
   private static final String    TOKEN_INFO_URL = "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=";
 
   @Override
@@ -33,6 +39,9 @@ public class GoogleAuthService implements AuthService {
       OutputStreamWriter wr = new OutputStreamWriter(request.getOutputStream());
       wr.flush();
       request.connect();
+      if(request.getResponseCode() != 200) {
+        return null;
+      }
       String responseBody = convertStreamToString(request.getInputStream());
       ObjectMapper mapper = new ObjectMapper();
       GoogleTokenResponse tokenResponse = mapper.readValue(responseBody, GoogleTokenResponse.class);
@@ -43,7 +52,14 @@ public class GoogleAuthService implements AuthService {
         user = new User();
         user.setEmail(tokenResponse.getEmail());
         user.setUsername("Nimetu");
+        Set<Privilege> privileges = new HashSet<Privilege>();
+        privileges.add(Privilege.ADD_COMMENT);
+        privileges.add(Privilege.ADD_SUBJECT);
+        privileges.add(Privilege.ADD_TOPIC);
+        user.setPrivileges(privileges);
+
         Long id = userService.create(user);
+
         user.setId(id);
       }
       return user;

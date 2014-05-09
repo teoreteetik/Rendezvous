@@ -1,0 +1,44 @@
+body{
+  padding-top:51px;
+}
+a:hover {
+  text-decoration:none;
+}
+
+.dropdown-menu {
+  width: 100%;
+}
+
+li.menuDropdown {
+  padding: 9px 5px;
+}
+
+.mainHeading {
+  margin-top:40px;
+}
+
+.article-meta {
+  margin: 0;
+  font-size: 0.7em;
+  color: #888888;
+}
+
+h3.topicTitle {
+  margin-bottom: 0px;
+}
+
+hr {
+  margin-top: 0;
+}
+
+#subjectNav {
+  margin-bottom: 0;
+}
+
+#messages {
+  list-style-type: none;
+}
+
+article header {
+  padding-bottom: 15px;
+}

@@ -1,38 +1,28 @@
 package ee.teoreteetik.tt.internal.service.impl;
 
+import ee.teoreteetik.tt.internal.dao.PublicationDAO;
 import ee.teoreteetik.tt.internal.dao.TopicDAO;
 import ee.teoreteetik.tt.internal.service.TopicService;
-import ee.teoreteetik.tt.model.Topic;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import ee.teoreteetik.tt.internal.model.Topic;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.springframework.stereotype.Service;
+import javax.annotation.Resource;
 
 @Service("topicService")
 public class TopicServiceImpl implements TopicService {
 
-  @Autowired private TopicDAO topicDAO;
-
-  @Override
-  public List<Topic> getBySubjectId(Long subjectId) {
-    return topicDAO.loadSubjectTopics(subjectId);
-  }
-
-  @Override
-  public Topic getById(Long topicId, boolean forEdit) {
-    Topic topic = topicDAO.loadById(topicId);
-    if (topic == null) {
-      return topic;
-    }
-    if (forEdit) {
-      topic.setTextHtml(null);
-    } else {
-      topic.setTextPlain(null);
-    }
-    return topic;
-  }
+  @Resource private TopicDAO topicDAO;
+  @Resource private PublicationDAO publicationDAO;
 
   @Override
   public Long createTopic(Topic topic) {
+    Validate.isTrue(!StringUtils.isBlank(topic.getTitle()));
+    Validate.isTrue(!StringUtils.isBlank(topic.getTextHtml()));
+    Validate.isTrue(!StringUtils.isBlank(topic.getTextPlain()));
+
+    Long id = publicationDAO.create(topic);
+    topic.setId(id);
     return topicDAO.create(topic);
   }
 }
