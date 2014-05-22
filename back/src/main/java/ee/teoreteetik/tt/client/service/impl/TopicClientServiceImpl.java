@@ -1,5 +1,6 @@
 package ee.teoreteetik.tt.client.service.impl;
 
+import ee.teoreteetik.tt.client.endpoint.socket.TopicSocket;
 import ee.teoreteetik.tt.client.exception.NotAuthorizedException;
 import ee.teoreteetik.tt.client.model.CommentRepresentation.CommentForDisplay;
 import ee.teoreteetik.tt.client.model.TopicRepresentation.CreateTopic;
@@ -107,7 +108,9 @@ public class TopicClientServiceImpl extends BaseClientServiceImpl implements Top
     topic.setAnonymous(topicToCreate.anonymous);
     topic.setSubjectId(topicToCreate.subjectId);
     topic.setUserId(user.getId());
-    return topicService.createTopic(topic);
+    Long id = topicService.createTopic(topic);
+    TopicSocket.sendTopicAlert(topic);
+    return id;
   }
 
   @Override
