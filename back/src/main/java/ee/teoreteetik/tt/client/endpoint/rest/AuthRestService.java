@@ -5,10 +5,7 @@ import ee.teoreteetik.tt.internal.authentication.Kubjas;
 import ee.teoreteetik.tt.internal.authentication.service.AuthService;
 import ee.teoreteetik.tt.internal.model.User;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
@@ -21,11 +18,10 @@ public class AuthRestService extends RestService {
   private final Logger           logger = LogManager.getLogger(AuthRestService.class);
   @Autowired private AuthService googleAuthService;
 
-  // TODO POST
-  @GET
-  @Path("google/{googleToken}")
+  @POST
+  @Path("google")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response authenticate(@PathParam("googleToken") final String googleToken) {
+  public Response authenticate(final String googleToken) {
     User user = googleAuthService.getUser(googleToken);
     if (user != null) {
       AuthToken token = Kubjas.login(user);
@@ -35,11 +31,10 @@ public class AuthRestService extends RestService {
     }
   }
 
-  // TODO POST
-  @GET
-  @Path("logout/{uuid}")
+  @POST
+  @Path("logout")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response logout(@PathParam("uuid") final String uuid) {
+  public Response logout(final String uuid) {
     Kubjas.logout(uuid);
     return Response.status(201).build();
   }
@@ -49,7 +44,6 @@ public class AuthRestService extends RestService {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getToken(@PathParam("uuid") final String uuid) {
     return Response.status(201).entity(Kubjas.getToken(uuid)).build();
-
   }
 
 }

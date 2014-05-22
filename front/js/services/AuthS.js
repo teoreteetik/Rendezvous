@@ -5,14 +5,13 @@ ngApp.factory(
     function (Restangular, SessionS) {
       return {
         login: function (token) {
-          return Restangular.one('auth/google', token).get();
+          return Restangular.one('auth').post('google', token);
         },
         isLoggedIn: function () {
           return SessionS.get('rendezvous') != undefined;
         },
-        logout: function () {
-          var uuid = SessionS.get('rendezvous').uuid;
-          return Restangular.one('auth/logout', uuid).get();
+        logout: function (uuid) {
+          return Restangular.one('auth').post('logout', uuid);
         },
         hasPrivilege: function(privilegeCode) {
           var privileges = this.getCurrentUser().privileges;

@@ -12,8 +12,8 @@ function ($scope, $location, AuthS, SubjectS, SessionS, Restangular) {
   $scope.auth = {
     login: function() {
       var state = encodeURI($location.path()).trim();
-     // var loc = "https://accounts.google.com/o/oauth2/auth?state=" + state + "&scope=email%20profile&response_type=token&client_id=935110585409-8rpukqlertqd0t27p9i8f6k3jj3jntsd.apps.googleusercontent.com&redirect_uri=https://localhost:8443/front/auth";
-      var loc = "https://accounts.google.com/o/oauth2/auth?state="+state+"&scope=email%20profile&response_type=token&client_id=935110585409.apps.googleusercontent.com&redirect_uri=https://ec2-54-213-178-112.us-west-2.compute.amazonaws.com/front/auth";
+     //var loc = "https://accounts.google.com/o/oauth2/auth?state=" + state + "&scope=email%20profile&response_type=token&client_id=935110585409-8rpukqlertqd0t27p9i8f6k3jj3jntsd.apps.googleusercontent.com&redirect_uri=https://localhost:8443/front/auth";
+     var loc = "https://accounts.google.com/o/oauth2/auth?state="+state+"&scope=email%20profile&response_type=token&client_id=935110585409.apps.googleusercontent.com&redirect_uri=https://ec2-54-213-178-112.us-west-2.compute.amazonaws.com/front/auth";
       window.location = loc;
     },
     isLoggedIn: function() {
@@ -26,7 +26,8 @@ function ($scope, $location, AuthS, SubjectS, SessionS, Restangular) {
       return AuthS.getCurrentUser();
     },
     logout: function () {
-      AuthS.logout().then(function(result) {
+      var uuid = SessionS.get('rendezvous').uuid;
+      AuthS.logout(uuid).then(function(result) {
         SessionS.unset('rendezvous');
         $location.path('/');
       });
