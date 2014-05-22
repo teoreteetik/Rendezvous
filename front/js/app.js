@@ -33,17 +33,22 @@ ngApp.config(['RestangularProvider', '$stateProvider', function (RestangularProv
     .state('master.semester.topics', {
       url: '/subjects/:subjectId/topics',
       templateUrl: 'templates/subjectTopics.html',
-      controller: ['$scope', '$stateParams', 'SubjectS', function($scope, $stateParams, SubjectS) {
+      controller: ['$scope', '$stateParams', 'SubjectS', '$location', function($scope, $stateParams, SubjectS, $location) {
         $scope.$parent.navStateHandler.setSelectedSubjectId($stateParams.subjectId);
         SubjectS.getSubjectTopics($stateParams.subjectId).then(function(result) {
           $scope.topics = result;
         });
+        $scope.deleteSubject = function(subjectId) {
+          SubjectS.deleteSubject(subjectId).then(function(result) {
+            $location.path('/semesters/' + $stateParams.semesterId + '/subjects');
+          });
+        };
       }]
     })
     .state('master.semester.topic', {
       url: '/subjects/:subjectId/topics/:topicId',
       templateUrl: 'templates/viewTopic.html',
-      controller: ['$scope', '$stateParams', 'TopicS', function($scope, $stateParams, TopicS) {
+      controller: ['$scope', '$stateParams', 'TopicS', '$location', function($scope, $stateParams, TopicS, $location) {
         $scope.$parent.navStateHandler.setSelectedSubjectId($stateParams.subjectId);
         TopicS.getTopic($stateParams.topicId, false).then(function(result) {
           $scope.topic = result;
@@ -54,7 +59,22 @@ ngApp.config(['RestangularProvider', '$stateProvider', function (RestangularProv
           TopicS.addComment(comment).then(function(result) {
             $scope.topic.comments.push(comment);
           });
-        }
+        };
+        $scope.deleteComment = function(commentId) {
+          TopicS.deleteComment(commentId).then(function(result) {
+            for (var i = 0 ; i < $scope.topic.comments.length ; i++) {
+              if ($scope.topic.comments[i].id == commentId) {
+                $scope.topic.comments.splice(i, 1);
+                break;
+              }
+            }
+          });
+        };
+        $scope.deleteTopic = function(topicId) {
+          TopicS.deleteTopic(topicId).then(function(result) {
+            $location.path('/semesters/' + $stateParams.semesterId + '/subjects/' + $stateParams.subjectId + '/topics');
+          });
+        };
       }]
     })
     .state('master.semester.addTopic', {

@@ -70,4 +70,11 @@ public class CommentClientServiceImpl extends BaseClientServiceImpl implements C
     return commentService.createComment(comment);
   }
 
+  @Override
+  public void deleteComment(Long commentId, User user) {
+    if (user == null || !user.hasAllPrivileges(Privilege.DELETE_FOREIGN_COMMENT)) {
+      throw new NotAuthorizedException();
+    }
+    commentService.deleteComment(commentId);
+  }
 }

@@ -6,5 +6,6 @@ import ee.teoreteetik.tt.internal.model.Comment;
 public interface CommentService {
 
   Long createComment(Comment comment);
+  void deleteComment(Long commentId);
 
 }

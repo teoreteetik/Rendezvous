@@ -3,6 +3,9 @@
     <li class="active" data-ng-show="auth.hasPrivilege('ADD_TOPIC')">
       <a href="#/semesters/{{navState.selectedSemesterId}}/subjects/{{navState.selectedSubjectId}}/addTopic">Uus teema</a>
     </li>
+    <li class="active" data-ng-show="auth.hasPrivilege('DELETE_SUBJECT')">
+      <a href="#" data-ng-click="deleteSubject(navState.selectedSubjectId)">Kustuta aine</a>
+    </li>
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown">Sorteeri <b class="caret"></b></a>
       <ul class="dropdown-menu">

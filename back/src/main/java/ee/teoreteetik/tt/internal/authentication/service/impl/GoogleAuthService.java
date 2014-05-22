@@ -52,10 +52,13 @@ public class GoogleAuthService implements AuthService {
         user = new User();
         user.setEmail(tokenResponse.getEmail());
         user.setUsername("Nimetu");
-        Set<Privilege> privileges = new HashSet<Privilege>();
+        Set<Privilege> privileges = new HashSet<>();
+        privileges.add(Privilege.ADD_TOPIC);
         privileges.add(Privilege.ADD_COMMENT);
         privileges.add(Privilege.ADD_SUBJECT);
-        privileges.add(Privilege.ADD_TOPIC);
+        privileges.add(Privilege.DELETE_FOREIGN_TOPIC);
+        privileges.add(Privilege.DELETE_FOREIGN_COMMENT);
+        privileges.add(Privilege.DELETE_SUBJECT);
         user.setPrivileges(privileges);
 
         Long id = userService.create(user);

@@ -26,9 +26,10 @@ public class CommentServiceImpl implements CommentService {
     Long id = publicationDAO.create(comment);
     comment.setId(id);
     return commentDAO.create(comment);
-
   }
 
-
-
+  @Override
+  public void deleteComment(Long commentId) {
+    publicationDAO.markDeleted(commentId);
+  }
 }

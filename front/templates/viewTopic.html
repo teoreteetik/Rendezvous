@@ -7,6 +7,7 @@
       <span class="article-meta">
         postitas {{topic.username}}
         <time dateTime="{{topic.datePosted | date:'yyyy-MM-dd'}}">{{topic.datePosted | date:'yyyy-MM-dd HH:mm'}}</time>
+        <a href="#" data-ng-show="auth.hasPrivilege('DELETE_FOREIGN_TOPIC')" data-ng-click="deleteTopic(topic.id)">Kustuta teema</a>
       </span>
     </header>
     <div class="articleText" data-ng-bind-html="topic.textHtml | toTrusted"><!--TODO nopenopenope -->
@@ -27,6 +28,7 @@
     <span class="article-meta">
       postitas {{comment.username}}
       <time dateTime="{{comment.datePosted | date:'yyyy-MM-dd'}}">{{comment.datePosted | date:'yyyy-MM-dd HH:mm'}}</time>
+      <a href="#" data-ng-show="auth.hasPrivilege('DELETE_FOREIGN_COMMENT')" data-ng-click="deleteComment(comment.id)">Kustuta kommentaar</a>
     </span>
   </article>
 

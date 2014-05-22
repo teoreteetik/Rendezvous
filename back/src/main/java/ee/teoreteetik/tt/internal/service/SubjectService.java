@@ -7,5 +7,6 @@ import java.util.List;
 public interface SubjectService {
 
   Long createSubject(Subject subject);
+  void deleteSubject(Long subjectId);
 
 }

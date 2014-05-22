@@ -24,4 +24,9 @@ public class SubjectDAO extends BaseDAO {
         subject.getUserId()});
     return id;
   }
+
+  public void markDeleted(Long subjectId) {
+    String sql = "UPDATE subject SET sys_deleted = TRUE WHERE id = ?";
+    getJdbcTemplate().update(sql, subjectId);
+  }
 }

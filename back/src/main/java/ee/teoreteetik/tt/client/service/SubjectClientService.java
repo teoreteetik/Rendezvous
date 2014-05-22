@@ -10,5 +10,5 @@ public interface SubjectClientService {
 
   List<SubjectForDisplay> getSubjectsBySemesterId(Long semesterId);
   Long createSubject(CreateSubject subjectToCreate, User user);
-
+  void deleteSubject(Long subjectId, User user);
 }

@@ -31,7 +31,7 @@ public class SubjectClientServiceImpl extends BaseClientServiceImpl implements S
             + "       COUNT(s.id) AS topic_count "
             + "FROM   subject s "
             + "LEFT JOIN topic t on t.subject_id = s.id "
-            + "WHERE s.semester_id = ? "
+            + "WHERE s.semester_id = ? AND s.sys_deleted = FALSE "
             + "GROUP BY s.id, s.name, s.code";
     List<SubjectForDisplay> result = getJdbcTemplate().query(sql, new Object[] { semesterId }, new ParameterizedRowMapper<SubjectForDisplay>() {
       @Override
@@ -59,6 +59,14 @@ public class SubjectClientServiceImpl extends BaseClientServiceImpl implements S
     subject.setSemesterId(subjectToCreate.semesterId);
     subject.setUserId(user.getId());
     return subjectService.createSubject(subject);
+  }
+
+  @Override
+  public void deleteSubject(Long subjectId, User user) {
+    if (user == null || !user.hasAllPrivileges(Privilege.DELETE_SUBJECT)) {
+      throw new NotAuthorizedException();
+    }
+    subjectService.deleteSubject(subjectId);
   }
 
 

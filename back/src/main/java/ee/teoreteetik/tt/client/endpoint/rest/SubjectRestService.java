@@ -39,4 +39,12 @@ public class SubjectRestService extends RestService {
     Long id = subjectClientService.createSubject(subjectToCreate, user);
     return Response.ok(id).build();
   }
+
+  @DELETE
+  @Path("{subjectId}")
+  public Response deleteSubject(@Context HttpHeaders headers, @PathParam("subjectId") final Long subjectId) {
+    User user = getUser(headers);
+    subjectClientService.deleteSubject(subjectId, user);
+    return Response.ok().build();
+  }
 }

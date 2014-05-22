@@ -23,5 +23,10 @@ public class PublicationDAO extends BaseDAO {
     return id;
   }
 
+  public void markDeleted(Long publicationId) {
+    String sql = "UPDATE publication SET sys_deleted = TRUE WHERE id = ?";
+    getJdbcTemplate().update(sql, publicationId);
+  }
+
 
 }

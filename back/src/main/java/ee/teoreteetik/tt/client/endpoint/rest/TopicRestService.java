@@ -48,4 +48,20 @@ public class TopicRestService extends RestService {
     return Response.ok(id).build();
   }
 
+  @DELETE
+  @Path("{topicId}/comments/{commentId}")
+  public Response deleteComment(@Context HttpHeaders headers, @PathParam("commentId") final Long commentId) {
+    User user = getUser(headers);
+    commentClientService.deleteComment(commentId, user);
+    return Response.ok().build();
+  }
+
+  @DELETE
+  @Path("{topicId}")
+  public Response deleteTopic(@Context HttpHeaders headers, @PathParam("topicId") final Long topicId) {
+    User user = getUser(headers);
+    topicClientService.deleteTopic(topicId, user);
+    return Response.ok().build();
+  }
+
 }

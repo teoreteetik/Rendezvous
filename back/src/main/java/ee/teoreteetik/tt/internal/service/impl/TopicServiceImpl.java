@@ -25,4 +25,9 @@ public class TopicServiceImpl implements TopicService {
     topic.setId(id);
     return topicDAO.create(topic);
   }
+
+  @Override
+  public void deleteTopic(Long topicId) {
+    publicationDAO.markDeleted(topicId);
+  }
 }

@@ -21,5 +21,10 @@ public class SubjectServiceImpl implements SubjectService {
     return subjectDAO.create(subject);
   }
 
+  @Override
+  public void deleteSubject(Long subjectId) {
+    subjectDAO.markDeleted(subjectId);
+  }
+
 
 }

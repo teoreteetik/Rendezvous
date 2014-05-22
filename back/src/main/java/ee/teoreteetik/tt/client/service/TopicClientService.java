@@ -8,8 +8,8 @@ import ee.teoreteetik.tt.internal.model.User;
 import java.util.List;
 
 public interface TopicClientService {
-
   TopicForDisplay getTopicForDisplay(Long topicId);
   List<TopicForListDisplay> getTopicsBySubjectId(Long subjectId);
   Long createTopic(CreateTopic topicToCreate, User user);
+  void deleteTopic(Long topicId, User user);
 }

@@ -110,4 +110,11 @@ public class TopicClientServiceImpl extends BaseClientServiceImpl implements Top
     return topicService.createTopic(topic);
   }
 
+  @Override
+  public void deleteTopic(Long topicId, User user) {
+    if(user == null || !user.hasAllPrivileges(Privilege.DELETE_FOREIGN_TOPIC)) {
+      throw new NotAuthorizedException();
+    }
+    topicService.deleteTopic(topicId);
+  }
 }

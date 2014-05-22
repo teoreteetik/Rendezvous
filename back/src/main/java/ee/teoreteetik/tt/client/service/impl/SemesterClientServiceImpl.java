@@ -16,7 +16,7 @@ public class SemesterClientServiceImpl extends BaseClientServiceImpl implements 
       String sql = ""
               + "SELECT s.id, "
               + "       s.text "
-              + "FROM   semester s";
+              + "FROM   semester s WHERE s.sys_deleted = FALSE";
       List<SemesterForDisplay> result = getJdbcTemplate().query(sql, new ParameterizedRowMapper<SemesterForDisplay>() {
         @Override
         public SemesterForDisplay mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -16,9 +16,13 @@ ngApp.factory(
         getSemesterSubjects: function(semesterId) {
             return Restangular.one('semesters', semesterId).getList('subjects');
         },
-        createSubject: function(subject){
+        createSubject: function(subject) {
           return Restangular.all('subjects').post(subject);
+        },
+        deleteSubject: function(subjectId) {
+          return Restangular.one('subjects', subjectId).remove();
         }
+
       }
     }
   ]

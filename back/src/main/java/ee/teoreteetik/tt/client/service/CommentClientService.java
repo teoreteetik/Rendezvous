@@ -11,4 +11,6 @@ public interface CommentClientService {
   List<CommentForDisplay> getCommentsForTopic(Long topicId);
 
   Long createComment(CommentRepresentation.CreateComment commentToCreate, User user);
+
+  void deleteComment(Long commentId, User user);
 }

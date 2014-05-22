@@ -19,6 +19,12 @@ ngApp.factory(
         },
         addComment: function(comment) {
           return Restangular.all('topics/dummy/comments').post(comment);
+        },
+        deleteTopic: function(topicId) {
+          return Restangular.one('topics', topicId).remove();
+        },
+        deleteComment: function(commentId) {
+          return Restangular.one('topics/dummy/comments', commentId).remove();
         }
       };
     }
